@@ -1,0 +1,69 @@
+﻿@model De02.Models.product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+
+<div>
+    <h4>product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.category.catname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category.catname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @{ 
+                string imagePath = "~/wwwroot/PhoneImages/" + Model.image;
+            }
+            <img src="@Url.Content(imagePath)" width="180" height="200" class="img-thumbnail" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.proid }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>

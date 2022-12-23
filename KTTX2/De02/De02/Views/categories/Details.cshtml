@@ -1,0 +1,26 @@
+﻿@model De02.Models.category
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.catname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.catid }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>
