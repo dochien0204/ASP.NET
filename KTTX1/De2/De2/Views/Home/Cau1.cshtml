@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+
+@{
+    var thanhTien = "";
+    var donGia = "";
+    var soLuong = "";
+    if(IsPost)
+    {
+        donGia = Request["donGia"];
+        soLuong = Request["soLuong"];
+        if(int.Parse(Request["soLuong"]) >= 100)
+        {
+            thanhTien = (soLuong.AsInt() * donGia.AsFloat()*0.85).ToString();
+        }
+        else
+        {
+            thanhTien = (soLuong.AsInt() * donGia.AsFloat()).ToString();
+        }
+    }
+} 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cau1</title>
+</head>
+<body>
+    <div> 
+        <form action="" method="post">
+            <table width="500px" border="1" cellpadding="5px" cellspacing="0">
+                <tr>
+                    <td>Mã Sản Phẩm</td>
+                    <td>
+                        <input type="text" name="maSP" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tên Sản Phẩm</td>
+                    <td>
+                        <input type="text" name="tenSP" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Loại Sản Phẩm
+                    </td>
+                    <td>
+                        <select name="loaiSp">
+                            <option>Nông sản</option>
+                            <option>Hải sản</option>
+                            <option>Đồ uống</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Số Lượng</td>
+                    <td>
+                        <input type="text" name="soLuong" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Đơn Giá</td>
+                    <td>
+                        <input type="text" name="donGia" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thành Tiên</td>
+                    <td>
+                        <input type="text" name="thanhTien" value="@thanhTien" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="submit" value="TÍNH"/>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</body>
+</html>

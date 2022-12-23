@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cau2</title>
+</head>
+<body>
+    <div> 
+        <form action="/Home/TinhHang" method="post">
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td>@Html.Label("Mã Hàng")</td>
+                    <td>@Html.TextBox("MaHang")</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Tên Hàng")</td>
+                    <td>@Html.TextBox("TenHang")</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Loại Hàng")</td>
+                    <td>
+                        @Html.DropDownList("LoaiHang", new List<SelectListItem>
+                   {
+                       new SelectListItem{Text="Quần áo", Value="1"},
+                       new SelectListItem{Text="Điện tử", Value="2"},
+                       new SelectListItem{Text="Gia dụng", Value="3"},
+                   })
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Số Lượng")</td>
+                    <td>@Html.TextBox("SoLuong")</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Đơn Giá")</td>
+                    <td>@Html.TextBox("DonGia")</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Thành Tiền")</td>
+                    <td>@Html.TextBox("ThanhTien")</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center">
+                        <input type="submit" value="Tính"/>
+                     </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
