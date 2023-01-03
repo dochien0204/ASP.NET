@@ -17,6 +17,10 @@ namespace OnThi.Controllers
         // GET: NhanViens
         public ActionResult Index()
         {
+            if(Session["userName"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             var nhanViens = db.NhanViens.Include(n => n.Phong);
             return View(nhanViens.ToList());
         }
@@ -108,7 +112,7 @@ namespace OnThi.Controllers
         // POST: NhanViens/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Manv,Hoten,Tuoi,Diachi,Luong,Maphong")] NhanVien nhanVien)
         {
@@ -120,8 +124,20 @@ namespace OnThi.Controllers
             }
             ViewBag.Maphong = new SelectList(db.Phongs, "Maphong", "Tenphong", nhanVien.Maphong);
             return View(nhanVien);
-        }
+        }*/
 
+        [HttpPost]
+        public ActionResult Edit(NhanVien nv) {
+            try
+            {
+                db.Entry(nv).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { result = true, JsonRequestBehavior.AllowGet });
+            } catch (Exception e)
+            {
+                return Json(new { result = false, error = e.Message });
+            }
+        }
         // GET: NhanViens/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -142,10 +158,16 @@ namespace OnThi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            db.NhanViens.Remove(nhanVien);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                NhanVien nhanVien = db.NhanViens.Find(id);
+                db.NhanViens.Remove(nhanVien);
+                db.SaveChanges();
+                return Json(new { result = true});
+            } catch(Exception e)
+            {
+                return Json(new { result = false, error = e.Message });
+            }
         }
 
         protected override void Dispose(bool disposing)

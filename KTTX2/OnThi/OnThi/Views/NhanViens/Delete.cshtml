@@ -57,8 +57,36 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" id="btnDelete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
+            <div id="message"></div>
         </div>
     }
 </div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script>
+    $(function () {
+        $("#btnDelete").click(function () {
+            var url = "/DeleteConfirmed/" + @Model.Manv;
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: "json",
+                contentType: "application/json; charset:utf-8",
+                success: function (response) {
+                    if (response.result == true) {
+                        $("#message").html("Edit successfully");
+                    } else {
+                        $("#message").html(response.error);
+                    }
+                },
+                error: function (response) {
+                    alert("Có lỗi thuộc ajax");
+                }
+            });
+        });
+    });
+</script>

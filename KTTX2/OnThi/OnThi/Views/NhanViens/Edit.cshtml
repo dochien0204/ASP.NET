@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
+    var maNv = Model.Manv;
 }
 
 <h2>Edit</h2>
@@ -74,9 +75,36 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 <script>
     $(function () {
+        $("#btnSave").click(function () {
+            var nv = {};
+            nv.Manv = @maNv;
+            nv.Hoten = $("#Hoten").val();
+            nv.Tuoi = $("#Tuoi").val();
+            nv.Diachi = $("#Diachi").val();
+            nv.Luong = $("#Luong").val();
+            nv.Maphong = $("#Maphong").val();
 
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("/Edit")',
+                data: '{nv:' + JSON.stringify(nv) + '}',
+                dataType: "json",
+                contentType: "application/json; charset:utf-8",
+                success: function (response) {
+                    if (response.result == true) {
+                        $("#message").html("Edit successfully");
+                    } else {
+                        $("#message").html(response.error);
+                    }
+                },
+                error: function (response) {
+                    alert("Có lỗi thuộc ajax");
+                }
+            });
+
+        });
     });
 </script>
