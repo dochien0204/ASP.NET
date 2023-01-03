@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login</h2>
+
+<label>UserName</label> <input type="text" id="userName" />
+<label>Password</label> <input type="text" id="password" />
+
+<button id="submit">Login</button>
+<br />
+<br />
+<div id="msg"></div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            if ($("#userName").val() == "") {
+                $("#msg").html("UserName is required");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/AjaxDemo2/Login",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"userName":"' + $("#userName").val() + '","password":"' + $("#password").val() + '"}',
+                    dataType: "html",
+                    success: function (response) {
+                        $("#msg").html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        $("#msg").html("Error: " + error);
+                    }
+                });
+            }
+            return false;
+        });
+
+    });
+
+</script>
+
