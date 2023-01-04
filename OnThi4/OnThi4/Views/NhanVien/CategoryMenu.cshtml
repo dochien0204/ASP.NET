@@ -1,0 +1,8 @@
+﻿@model IEnumerable<OnThi4.Models.Phong>
+
+@foreach (var item in Model)
+            {
+     var url = "/NhanVienTheoPhong/" + item.Maphong;
+                <a href="@url">@item.Tenphong</a> <label>&nbsp;|&nbsp;</label>
+
+            }
